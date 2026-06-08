@@ -1,0 +1,32 @@
+# Start from the official ROS 2 Jazzy desktop image
+FROM osrf/ros:jazzy-desktop
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install all necessary ROS 2 dependencies
+RUN apt-get update && apt-get install -y \
+    ros-jazzy-ros-gz \
+    ros-jazzy-foxglove-bridge \
+    ros-jazzy-robot-localization \
+    ros-jazzy-ros2-control \
+    ros-jazzy-ros2-controllers \
+    ros-jazzy-gz-ros2-control \
+    nano \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set up the workspace directory inside the container
+WORKDIR /workspace
+
+# Copy the entire source code into the container
+# (Unlike the dev Dockerfile which relies on a volume mount)
+COPY . /workspace/
+
+# Build the ROS 2 workspace
+RUN /bin/bash -c "source /opt/ros/jazzy/setup.bash && colcon build --symlink-install"
+
+# Automatically source ROS 2 and the built workspace when opening a terminal
+RUN echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc
+RUN echo "source /workspace/install/setup.bash" >> ~/.bashrc
+
+# Set the default command to launch the simulation automatically
+CMD ["/bin/bash", "-c", "source /opt/ros/jazzy/setup.bash && source /workspace/install/setup.bash && ros2 launch fusion_bot sim.launch.py"]

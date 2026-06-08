@@ -1,0 +1,78 @@
+name: ROS 2 Jazzy CI
+
+on:
+  push:
+    branches: [ "master", "main" ]
+  pull_request:
+    branches: [ "master", "main" ]
+
+jobs:
+  linting:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install pre-commit
+        run: pip install pre-commit
+
+      - name: Run pre-commit hooks (Black, Flake8, isort)
+        run: pre-commit run --all-files
+
+  build_and_test:
+    needs: linting
+    runs-on: ubuntu-24.04 # Jazzy requires Ubuntu 24.04 (Noble)
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup ROS 2 Jazzy
+        uses: ros-tooling/setup-ros@v0.7
+        with:
+          required-ros-distributions: jazzy
+
+      - name: Install Dependencies (rosdep)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ros-jazzy-ros-gz ros-jazzy-foxglove-bridge ros-jazzy-robot-localization ros-jazzy-ros2-control ros-jazzy-ros2-controllers ros-jazzy-gz-ros2-control
+          rosdep update
+          rosdep install --from-paths src --ignore-src -y --rosdistro jazzy
+
+      - name: Build Workspace
+        run: |
+          source /opt/ros/jazzy/setup.bash
+          colcon build --symlink-install
+
+      - name: Run Automated Tests (URDF & Launch)
+        run: |
+          source /opt/ros/jazzy/setup.bash
+          source install/setup.bash
+          colcon test
+          colcon test-result --all
+
+  build_for_harbor:
+    needs: build_and_test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/')
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Build and Push to Harbor (via Kaniko)
+        uses: aevea/action-kaniko@master
+        with:
+          image: lvtwinshell/fusion-bot-simulation
+          registry: ${{ secrets.HARBOR_HOSTNAME }}
+          username: ${{ secrets.HARBOR_USERNAME }}
+          password: ${{ secrets.HARBOR_PASSWORD }}
+          cache: true
+          cache_registry: ${{ secrets.HARBOR_HOSTNAME }}/lvtwinshell/cache
+          dockerfile: Dockerfile.prod
+          tag: ${{ github.ref_name }}
