@@ -44,13 +44,13 @@ def generate_launch_description():
         package="ros_gz_bridge",
         executable="parameter_bridge",
         arguments=[
-            "/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock]",
-            "/imu@sensor_msgs/msg/Imu[gz.msgs.IMU]",
-            "/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan]",
-            "/camera@sensor_msgs/msg/Image[gz.msgs.Image]",
-            "/camera/depth_image@sensor_msgs/msg/Image[gz.msgs.Image]",
-            "/camera/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked]",
-            "/camera/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo]",
+            "/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock",
+            "/imu@sensor_msgs/msg/Imu[gz.msgs.IMU",
+            "/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan",
+            "/camera@sensor_msgs/msg/Image[gz.msgs.Image",
+            "/camera/depth_image@sensor_msgs/msg/Image[gz.msgs.Image",
+            "/camera/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked",
+            "/camera/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo",
         ],
         output="screen",
     )
@@ -79,6 +79,12 @@ def generate_launch_description():
         ],
     )
 
+    foxglove = Node(
+        package="foxglove_bridge",
+        executable="foxglove_bridge",
+        output="screen",
+    )
+
     return LaunchDescription(
-        [rsp, gazebo, spawn_entity, bridge, broadcaster, skid_steer]
+        [rsp, gazebo, spawn_entity, bridge, broadcaster, skid_steer, foxglove]
     )
