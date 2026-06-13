@@ -35,11 +35,22 @@ if(BUILD_TESTING)
   )
 endif()
 
+# Add C++ targets
+add_executable(fault_injector_node src/fault_injector_node.cpp)
+ament_target_dependencies(fault_injector_node rclcpp nav_msgs geometry_msgs)
+
+# Install compiled targets
+install(TARGETS
+  fault_injector_node
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 # Install directories for non-compiled files (Launch, URDF, configs, etc.)
 install(DIRECTORY
   launch
   description
   config
+  worlds
   DESTINATION share/${PROJECT_NAME}
 )
 
