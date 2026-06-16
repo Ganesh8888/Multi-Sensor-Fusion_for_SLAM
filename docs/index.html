@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FusionBot-Core: Cloud-Native Autonomous Mobile Robot</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-brand">
+      <p class="eyebrow">Core Platform Project</p>
+      <h1>FusionBot-Core: Cloud-Native AMR Stack</h1>
+      <p class="tagline">An industrial-grade, fault-tolerant Autonomous Mobile Robot backbone featuring Extended Kalman Filter sensor fusion, SLAM Toolbox, and headless Kubernetes deployment.</p>
+    </div>
+    <nav class="site-nav">
+      <a href="#overview">Overview</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#results">Results</a>
+      <a href="#deployment">Deployment</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Project Showcase</p>
+        <h2>A Robust Foundation for Robotics</h2>
+        <p>This page presents the <strong>FusionBot-Core</strong> platform. Built from the ground up, this project serves as a foundational "Backbone Bot" for future robotics research. It tackles the hardest challenges in modern robotics: time synchronization, skid-steer odometry drift, and cloud-native simulation.</p>
+        <p>By engineering a modular pipeline that perfectly fuses Wheel Odometry, IMU data, and Visual Odometry, the robot maintains fault-tolerant localization even when sensors fail or wheels slip on industrial floors.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="https://github.com/Ganesh8888/FusionBot-Core" target="_blank" rel="noopener">View Repository</a>
+          <a class="button secondary" href="#results">View Benchmarks</a>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <div class="stat-card">
+          <span class="stat-label">Core Tech Stack</span>
+          <strong>ROS 2 Jazzy, Gazebo Harmonic</strong>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Sensor Fusion</span>
+          <strong>robot_localization (EKF)</strong>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Cloud Deployment</span>
+          <strong>Minikube Kubernetes Cluster</strong>
+        </div>
+      </div>
+    </section>
+
+    <section id="overview" class="section">
+      <h2>Overview</h2>
+      <p>The core philosophy behind FusionBot-Core is to create a robot that is virtually indestructible from a software perspective. Industrial environments are chaotic: wheels slip on oil, LiDARs get blinded by dust, and cameras lose tracking in poor lighting. By fusing multiple disparate sensors through an Extended Kalman Filter, the robot calculates an optimal state estimate that rejects individual sensor failures.</p>
+      <div class="info-grid">
+        <article class="info-card">
+          <h3>The Problem</h3>
+          <p>Skid-steer robots rely on sliding to turn, which makes their raw wheel encoders highly inaccurate during rotations. A single slip can cause the entire SLAM map to permanently distort.</p>
+        </article>
+        <article class="info-card">
+          <h3>The Solution</h3>
+          <p>We decouple the rotation from the wheels and heavily trust a 6-DOF IMU. By tuning the EKF covariance matrices, the system automatically ignores spurious wheel data when the robot spins.</p>
+        </article>
+        <article class="info-card">
+          <h3>The Backbone</h3>
+          <p>With a perfectly stable TF tree and verified odometry, developers can confidently build Nav2 path-planning or YOLO computer vision modules on top of this platform without debugging core localization.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="architecture" class="section">
+      <h2>Architecture & Sensor Fusion</h2>
+      <p>The system runs entirely within the ROS 2 framework, bridging data from the Gazebo Harmonic physics engine via custom C++ nodes to ensure perfect timestamp synchronization (`use_sim_time: True`).</p>
+      
+      <div class="info-grid">
+        <article class="info-card">
+          <h3>SLAM Toolbox</h3>
+          <p>Running as an asynchronous lifecycle node, it processes the fused `odometry/filtered` data and 2D LiDAR scans to map complex geometric environments.</p>
+        </article>
+        <article class="info-card">
+          <h3>RTAB-Map Visual Odometry</h3>
+          <p>An RGB-D camera generates 3D visual odometry, providing a completely independent motion estimate to double-check the mechanical wheels.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="results" class="section">
+      <h2>Benchmarking Results</h2>
+      <p>To mathematically prove the fault-tolerance of our sensor fusion architecture, we injected massive Gaussian noise into the wheel encoders (simulating severe wheel slip and mechanical failure). We then recorded the raw noisy odometry versus our EKF filtered odometry using `ros2 bag`.</p>
+      <p>Using the Python `evo` benchmarking suite, we compared the trajectories. Despite the raw wheel data hallucinating over 353 meters of travel, the EKF filter mathematically corrected the path back to the true 9.2 meters of actual movement.</p>
+      
+      <figure class="figure">
+        <img src="assets/benchmarking_plot_trajectories.png" alt="EVO Trajectory Benchmark: Raw vs Filtered Odometry" />
+        <figcaption>EVO Benchmark: The chaotic blue path shows the raw noisy wheel data. The smooth green path shows the EKF perfectly correcting the localization.</figcaption>
+      </figure>
+    </section>
+
+    <section id="deployment" class="section">
+      <h2>Cloud-Native Deployment</h2>
+      <p>FusionBot-Core is designed to run in the cloud. Developing ROS 2 applications locally requires massive installations and specific Linux distributions. By fully containerizing the stack in `Dockerfile.prod` and writing Kubernetes configuration files, the entire robot can be spawned in a headless cloud server (like Amazon EKS or local Minikube).</p>
+      <p>To solve the issue of GUI-dependent physics engines crashing in the cloud, Gazebo Harmonic is configured to run in pure headless Server Mode (`-s`), and Foxglove Studio connects remotely via WebSockets to visualize the simulation in real-time from any web browser.</p>
+    </section>
+
+  </main>
+</body>
+</html>
