@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y \
     ros-jazzy-ros2-controllers \
     ros-jazzy-gz-ros2-control \
     ros-jazzy-rtabmap-odom \
+    ros-jazzy-slam-toolbox \
     nano \
     && rm -rf /var/lib/apt/lists/*
 

@@ -65,45 +65,45 @@
       <static>true</static>
       <!-- Wall North -->
       <link name="wall_n">
-        <pose>0 4 0.25 0 0 0</pose>
+        <pose>0 4 0.5 0 0 0</pose>
         <collision name="collision">
-          <geometry><box><size>8 0.1 0.5</size></box></geometry>
+          <geometry><box><size>8 0.1 1.0</size></box></geometry>
         </collision>
         <visual name="visual">
-          <geometry><box><size>8 0.1 0.5</size></box></geometry>
+          <geometry><box><size>8 0.1 1.0</size></box></geometry>
           <material><ambient>0.5 0.5 0.5 1</ambient><diffuse>0.7 0.7 0.7 1</diffuse></material>
         </visual>
       </link>
       <!-- Wall South -->
       <link name="wall_s">
-        <pose>0 -4 0.25 0 0 0</pose>
+        <pose>0 -4 0.5 0 0 0</pose>
         <collision name="collision">
-          <geometry><box><size>8 0.1 0.5</size></box></geometry>
+          <geometry><box><size>8 0.1 1.0</size></box></geometry>
         </collision>
         <visual name="visual">
-          <geometry><box><size>8 0.1 0.5</size></box></geometry>
+          <geometry><box><size>8 0.1 1.0</size></box></geometry>
           <material><ambient>0.5 0.5 0.5 1</ambient><diffuse>0.7 0.7 0.7 1</diffuse></material>
         </visual>
       </link>
       <!-- Wall East -->
       <link name="wall_e">
-        <pose>4 0 0.25 0 0 1.5708</pose>
+        <pose>4 0 0.5 0 0 1.5708</pose>
         <collision name="collision">
-          <geometry><box><size>8 0.1 0.5</size></box></geometry>
+          <geometry><box><size>8 0.1 1.0</size></box></geometry>
         </collision>
         <visual name="visual">
-          <geometry><box><size>8 0.1 0.5</size></box></geometry>
+          <geometry><box><size>8 0.1 1.0</size></box></geometry>
           <material><ambient>0.5 0.5 0.5 1</ambient><diffuse>0.7 0.7 0.7 1</diffuse></material>
         </visual>
       </link>
       <!-- Wall West -->
       <link name="wall_w">
-        <pose>-4 0 0.25 0 0 1.5708</pose>
+        <pose>-4 0 0.5 0 0 1.5708</pose>
         <collision name="collision">
-          <geometry><box><size>8 0.1 0.5</size></box></geometry>
+          <geometry><box><size>8 0.1 1.0</size></box></geometry>
         </collision>
         <visual name="visual">
-          <geometry><box><size>8 0.1 0.5</size></box></geometry>
+          <geometry><box><size>8 0.1 1.0</size></box></geometry>
           <material><ambient>0.5 0.5 0.5 1</ambient><diffuse>0.7 0.7 0.7 1</diffuse></material>
         </visual>
       </link>
@@ -114,56 +114,56 @@
       <static>true</static>
       <!-- Cylinder 1 -->
       <link name="col_1">
-        <pose>1.5 1.5 0.25 0 0 0</pose>
+        <pose>1.5 1.5 0.5 0 0 0</pose>
         <collision name="collision">
-          <geometry><cylinder><radius>0.3</radius><length>0.5</length></cylinder></geometry>
+          <geometry><cylinder><radius>0.3</radius><length>1.0</length></cylinder></geometry>
         </collision>
         <visual name="visual">
-          <geometry><cylinder><radius>0.3</radius><length>0.5</length></cylinder></geometry>
+          <geometry><cylinder><radius>0.3</radius><length>1.0</length></cylinder></geometry>
           <material><ambient>0.1 0.5 0.8 1</ambient><diffuse>0.2 0.6 0.9 1</diffuse></material>
         </visual>
       </link>
       <!-- Cylinder 2 -->
       <link name="col_2">
-        <pose>-1.5 1.5 0.25 0 0 0</pose>
+        <pose>-1.5 1.5 0.5 0 0 0</pose>
         <collision name="collision">
-          <geometry><cylinder><radius>0.3</radius><length>0.5</length></cylinder></geometry>
+          <geometry><cylinder><radius>0.3</radius><length>1.0</length></cylinder></geometry>
         </collision>
         <visual name="visual">
-          <geometry><cylinder><radius>0.3</radius><length>0.5</length></cylinder></geometry>
+          <geometry><cylinder><radius>0.3</radius><length>1.0</length></cylinder></geometry>
           <material><ambient>0.1 0.5 0.8 1</ambient><diffuse>0.2 0.6 0.9 1</diffuse></material>
         </visual>
       </link>
       <!-- Cylinder 3 -->
       <link name="col_3">
-        <pose>1.5 -1.5 0.25 0 0 0</pose>
+        <pose>1.5 -1.5 0.5 0 0 0</pose>
         <collision name="collision">
-          <geometry><cylinder><radius>0.3</radius><length>0.5</length></cylinder></geometry>
+          <geometry><cylinder><radius>0.3</radius><length>1.0</length></cylinder></geometry>
         </collision>
         <visual name="visual">
-          <geometry><cylinder><radius>0.3</radius><length>0.5</length></cylinder></geometry>
+          <geometry><cylinder><radius>0.3</radius><length>1.0</length></cylinder></geometry>
           <material><ambient>0.1 0.5 0.8 1</ambient><diffuse>0.2 0.6 0.9 1</diffuse></material>
         </visual>
       </link>
       <!-- Cylinder 4 -->
       <link name="col_4">
-        <pose>-1.5 -1.5 0.25 0 0 0</pose>
+        <pose>-1.5 -1.5 0.5 0 0 0</pose>
         <collision name="collision">
-          <geometry><cylinder><radius>0.3</radius><length>0.5</length></cylinder></geometry>
+          <geometry><cylinder><radius>0.3</radius><length>1.0</length></cylinder></geometry>
         </collision>
         <visual name="visual">
-          <geometry><cylinder><radius>0.3</radius><length>0.5</length></cylinder></geometry>
+          <geometry><cylinder><radius>0.3</radius><length>1.0</length></cylinder></geometry>
           <material><ambient>0.1 0.5 0.8 1</ambient><diffuse>0.2 0.6 0.9 1</diffuse></material>
         </visual>
       </link>
       <!-- Middle box -->
       <link name="box_mid">
-        <pose>0 0 0.25 0 0 0.785</pose>
+        <pose>0 0 0.5 0 0 0.785</pose>
         <collision name="collision">
-          <geometry><box><size>0.6 0.6 0.5</size></box></geometry>
+          <geometry><box><size>0.6 0.6 1.0</size></box></geometry>
         </collision>
         <visual name="visual">
-          <geometry><box><size>0.6 0.6 0.5</size></box></geometry>
+          <geometry><box><size>0.6 0.6 1.0</size></box></geometry>
           <material><ambient>0.8 0.1 0.1 1</ambient><diffuse>0.9 0.2 0.2 1</diffuse></material>
         </visual>
       </link>

@@ -12,6 +12,7 @@ find_package(std_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(nav_msgs REQUIRED)
+find_package(diagnostic_msgs REQUIRED)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -39,9 +40,17 @@ endif()
 add_executable(fault_injector_node src/fault_injector_node.cpp)
 ament_target_dependencies(fault_injector_node rclcpp nav_msgs geometry_msgs)
 
+add_executable(diagnostics_node src/diagnostics_node.cpp)
+ament_target_dependencies(diagnostics_node rclcpp sensor_msgs nav_msgs diagnostic_msgs)
+
+add_executable(twist_to_stamped_node src/twist_to_stamped_node.cpp)
+ament_target_dependencies(twist_to_stamped_node rclcpp geometry_msgs)
+
 # Install compiled targets
 install(TARGETS
   fault_injector_node
+  diagnostics_node
+  twist_to_stamped_node
   DESTINATION lib/${PROJECT_NAME}
 )
 

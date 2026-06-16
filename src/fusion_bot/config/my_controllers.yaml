@@ -18,4 +18,7 @@ skid_steer_controller:
     wheel_radius: 0.05
     use_stamped_vel: false
     base_frame_id: base_footprint
-    open_loop: true
+    open_loop: false
+    enable_odom_tf: false
+    pose_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.03]
+    twist_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.03]

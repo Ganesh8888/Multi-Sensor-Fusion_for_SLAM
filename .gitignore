@@ -20,3 +20,8 @@ venv/
 src/*
 # ...BUT explicitly track fusion_bot
 !src/fusion_bot/
+
+# Benchmarking and ROSBags
+benchmarking_bag/
+*.png
+*.db3

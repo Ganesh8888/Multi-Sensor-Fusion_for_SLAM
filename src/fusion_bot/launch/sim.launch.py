@@ -35,7 +35,7 @@ def generate_launch_description():
                 )
             ]
         ),
-        launch_arguments={"gz_args": [world_path, " -r -v4"]}.items(),
+        launch_arguments={"gz_args": [world_path, " -s -r -v4"]}.items(),
     )
 
     spawn_entity = Node(
@@ -71,7 +71,7 @@ def generate_launch_description():
     )
 
     broadcaster = TimerAction(
-        period=2.0,
+        period=15.0,
         actions=[
             Node(
                 package="controller_manager",
@@ -83,7 +83,7 @@ def generate_launch_description():
     )
 
     skid_steer = TimerAction(
-        period=4.0,
+        period=18.0,
         actions=[
             Node(
                 package="controller_manager",
@@ -98,6 +98,7 @@ def generate_launch_description():
         package="foxglove_bridge",
         executable="foxglove_bridge",
         output="screen",
+        parameters=[{"use_sim_time": True}],
     )
 
     visual_odom = IncludeLaunchDescription(
@@ -117,6 +118,45 @@ def generate_launch_description():
         executable="fault_injector_node",
         name="fault_injector",
         output="screen",
+        parameters=[{"use_sim_time": True}],
+    )
+
+    diagnostics = Node(
+        package="fusion_bot",
+        executable="diagnostics_node",
+        name="diagnostics",
+        output="screen",
+        parameters=[{"use_sim_time": True}],
+    )
+
+    ekf_config_path = os.path.join(
+        get_package_share_directory(pkg_name), "config", "ekf.yaml"
+    )
+
+    ekf = Node(
+        package="robot_localization",
+        executable="ekf_node",
+        name="ekf_filter_node",
+        output="screen",
+        parameters=[ekf_config_path, {"use_sim_time": True}],
+    )
+
+    slam = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            [
+                os.path.join(
+                    get_package_share_directory(pkg_name), "launch", "slam.launch.py"
+                )
+            ]
+        ),
+    )
+
+    twist_bridge = Node(
+        package="fusion_bot",
+        executable="twist_to_stamped_node",
+        name="twist_to_stamped_bridge",
+        output="screen",
+        parameters=[{"use_sim_time": True}],
     )
 
     return LaunchDescription(
@@ -130,5 +170,9 @@ def generate_launch_description():
             foxglove,
             visual_odom,
             fault_injector,
+            diagnostics,
+            ekf,
+            slam,
+            twist_bridge,
         ]
     )

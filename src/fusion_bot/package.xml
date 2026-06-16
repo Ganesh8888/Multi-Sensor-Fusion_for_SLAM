@@ -14,6 +14,7 @@
   <depend>geometry_msgs</depend>
   <depend>sensor_msgs</depend>
   <depend>nav_msgs</depend>
+  <depend>diagnostic_msgs</depend>
 
   <!-- Runtime Dependencies for Simulation and Visualization -->
   <exec_depend>robot_state_publisher</exec_depend>
@@ -23,6 +24,7 @@
   <exec_depend>ros_gz</exec_depend>
   <exec_depend>robot_localization</exec_depend>
   <exec_depend>rtabmap_odom</exec_depend>
+  <exec_depend>slam_toolbox</exec_depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
