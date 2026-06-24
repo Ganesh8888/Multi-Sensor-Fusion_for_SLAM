@@ -15,12 +15,6 @@ find_package(nav_msgs REQUIRED)
 find_package(diagnostic_msgs REQUIRED)
 
 if(BUILD_TESTING)
-  find_package(ament_lint_auto REQUIRED)
-  set(ament_cmake_copyright_FOUND TRUE)
-  set(ament_cmake_cpplint_FOUND TRUE)
-  set(ament_cmake_flake8_FOUND TRUE)
-  set(ament_cmake_pep257_FOUND TRUE)
-  ament_lint_auto_find_test_dependencies()
 
   find_package(ament_cmake_pytest REQUIRED)
   find_package(launch_testing_ament_cmake REQUIRED)
