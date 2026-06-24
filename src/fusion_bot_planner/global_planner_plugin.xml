@@ -1,0 +1,5 @@
+<library path="fusion_bot_planner">
+  <class name="fusion_bot_planner/FusionBotPlanner" type="fusion_bot_planner::FusionBotPlanner" base_class_type="nav2_core::GlobalPlanner">
+    <description>Karpaga's Custom A* Global Planner</description>
+  </class>
+</library>

@@ -35,7 +35,7 @@ def generate_launch_description():
                 )
             ]
         ),
-        launch_arguments={"gz_args": [world_path, " -s -r -v4"]}.items(),
+        launch_arguments={"gz_args": [world_path, " -r -v4"]}.items(),
     )
 
     spawn_entity = Node(
@@ -168,10 +168,10 @@ def generate_launch_description():
             broadcaster,
             skid_steer,
             foxglove,
-            visual_odom,
+            # visual_odom,
             fault_injector,
             diagnostics,
-            ekf,
+            # ekf,
             slam,
             twist_bridge,
         ]
