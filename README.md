@@ -54,4 +54,5 @@ ros2 launch fusion_bot navigation.launch.py
 3. Use the "Publish Pose" tool on `/goal_pose` to watch the A* algorithm dynamically navigate the robot!
 
 ## 🎥 Demonstration
-https://github.com/Ganesh8888/FusionBot-Core/raw/main/docs/demo_video.webm
+
+<video src="https://github.com/Ganesh8888/FusionBot-Core/raw/main/docs/demo_video.webm" controls="controls" muted="muted" autoplay="autoplay" loop="loop" style="max-width: 100%;"></video>
