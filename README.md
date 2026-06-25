@@ -55,4 +55,4 @@ ros2 launch fusion_bot navigation.launch.py
 
 ## 🎥 Demonstration
 
-<video src="https://github.com/Ganesh8888/FusionBot-Core/raw/main/docs/demo_video.webm" controls="controls" muted="muted" autoplay="autoplay" loop="loop" style="max-width: 100%;"></video>
+![FusionBot A* Demonstration](docs/demo_video.webm)
