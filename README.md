@@ -55,5 +55,5 @@ ros2 launch fusion_bot navigation.launch.py
 
 ## 🎥 Demonstration
 
-[Screencast from 2026-06-24 18-55-26.webm](https://github.com/user-attachments/assets/8b442efb-3a38-4810-8c84-19ba8fbacce7)
+<video src="https://github.com/user-attachments/assets/8b442efb-3a38-4810-8c84-19ba8fbacce7" controls="controls" muted="muted" autoplay="autoplay" loop="loop" style="max-width: 100%;"></video>
 
